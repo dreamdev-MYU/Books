@@ -1,0 +1,30 @@
+<!-- books.html -->
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <!-- Head content -->
+</head>
+<body>
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+    
+    <!-- Book sections -->  
+    <div class="container">
+        <h1>All Books</h1>
+        <div class="row">
+            {% for book in books %}
+                <div class="col-md-4">
+                    <!-- Display book details -->
+                    <h2>{{ book.name }}</h2>
+                    <p>{{ book.description }}</p>
+                    <!-- Add other book details -->
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- JavaScript imports -->
+</body>
+</html>

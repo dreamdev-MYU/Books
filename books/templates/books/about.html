@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h1>{{ book.name }}</h1>
+        <img src="{{ book.image.url }}" alt="explore image" style="width:400px; height:400px;">
+        <p>{{ book.description }}</p>
+        
+        <h2>Comments</h2>
+        <ul>
+            {% for review in book.reviews.all %}
+            <li>
+                <b>{{ review.user.username }}</b> {{ review.stars_given }} <i>yulduzcha berdi {{ review.created_at }}</i>
+                <p>{{ review.comment_text }}</p>
+                <hr>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Add Comment</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
