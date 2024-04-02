@@ -10,3 +10,6 @@ urlpatterns = [
     path('profile/', ProfileUpdateView.as_view(), name='profile'),
     path('profile_view/', ProfileView.as_view(), name='profile_view'),   
 ]
+
+
+

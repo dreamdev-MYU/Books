@@ -39,10 +39,11 @@
         </li>
 
       </ul>
-      <form class="form-inline my-2 my-lg-4" style="margin-right:50px;">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="form-inline my-2 my-lg-4" style="margin-right:50px" method="GET" action="{% url 'books:books_page' %}">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+    </form>
+    
       <ul class="navbar-nav me-2 mb-4 mb-lg-0">
         {% if user.is_authenticated %}
         <li class="nav-item dropdown">

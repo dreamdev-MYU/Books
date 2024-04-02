@@ -40,7 +40,7 @@
         <div class="col-md-4 col-sm-6">
             <div class="single-explore-item">
                 <div class="single-explore-img">
-                    <img src="{{ book.image.url }}" alt="explore image" style="width:380px; height:380px">
+                    <img src="{{ book.image.url }}" alt="explore image" style="height:270px;">
                     <div class="single-explore-img-info">
                         <button onclick="window.location.href='#'">Best rated</button>
                         <div class="single-explore-image-icon-box">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="single-explore-txt bg-theme-1">
-                    <h2><a href="#">{{ book.name }}</a></h2>
+                    <h2><a href="{% url 'books:about_page' book.id %}">{{ book.name }}</a></h2>
                     <p class="explore-rating-price">
                         <span class="explore-rating">5.0 <i class="fa-solid fa-star" style="color: #FFD43B;"></i></span>
                         <a href="#">10 ratings</a> 
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-sm-10">
                                 <p>
-                                    {{ book.description|slice:":20" }}.
+                                    {{ book.description|slice:":35" }}.
                                 </p>
                             </div>
                         </div>

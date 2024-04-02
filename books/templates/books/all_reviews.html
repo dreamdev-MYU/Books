@@ -62,7 +62,8 @@
                             </div><!--/.testimonial-info-->
                             <div class="testimonial-comment">
                                 <p>
-                                    {{review.comment_text}}
+                                    {{review.comment_text|slice:"40"}}
+                                    
                                 </p>
                             </div><!--/.testimonial-comment-->
                         </div><!--/.testimonial-description-->
@@ -75,9 +76,7 @@
         
         </section>
 
-        {% for review in all_reviews %}
-
-        {% endfor %}
+    
     
     <script src="{% static 'assets/js/jquery.js' %}"></script>
         

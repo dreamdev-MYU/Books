@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Books,Comment, Category
 from .forms import BooksCommentForm
 from django.views import View
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -46,7 +47,7 @@ def russian_books_view(request):
 
 
 
-from django.shortcuts import redirect
+
 
 def about(request, id):    
     book = get_object_or_404(Books, pk=id)
@@ -55,13 +56,13 @@ def about(request, id):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.book = book
+            
+            comment.user = request.user
             comment.save()
             return redirect('books:about_page', id=id)  
     else:
         form = BooksCommentForm()
     return render(request, 'books/about.html', {'book': book, 'form': form})
-
-
 
 
 
@@ -74,14 +75,31 @@ def all_reviews(request):
 
 
 class AddCommentView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        book = get_object_or_404(Books, pk=id)
+        form = BooksCommentForm()
+        return render(request, 'books/about.html', {'book': book, 'form': form})
+
     def post(self, request, id):
-        book = Books.objects.get(id=id)
+        book = get_object_or_404(Books, pk=id)
         form = BooksCommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.book = book
-            comment.user = request.user  # Assign the authenticated user
+            
+            comment.user = request.user
             comment.save()
             return redirect(reverse("books:about_page", kwargs={"id": book.id}))
-        
         return render(request, 'books/about.html', {'book': book, 'form': form})
+
+@login_required
+def add_comment(request, book_id):
+    if request.method == 'POST':
+        user_id = request.user.id  
+        comment_text = request.POST.get('comment_text')
+    
+        comment = Comment.objects.create(user_id=user_id, book_id=book_id, comment_text=comment_text)
+       
+        return redirect('book_detail', book_id=book_id)  
+    else:
+        return redirect('book_detail', book_id=book_id) 
