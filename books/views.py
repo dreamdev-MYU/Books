@@ -1,14 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Books,Comment, Category
 from .forms import BooksCommentForm
 from django.views import View
+from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Avg
-
-
-
-
-
 
 
 
@@ -17,8 +12,6 @@ def category_books_view(request, category_id):
     category = Category.objects.get(id=category_id)
     books_in_category = category.books_set.all()  
     return render(request, 'books/category_books.html', {'category': category, 'books': books_in_category})
-
-
 
 
 def books_page(request):

@@ -1,25 +1,108 @@
+<!DOCTYPE html>
 {% load static %}
-        <body>
-            <div class="book-details">
-               
-                <h1>All Reviews</h1>
-                <hr>
-                {% for review in all_reviews %}
-                {% csrf_token %}
-                {{ form.as_p }}              
-                <div class="row mt-2 mb-2">
-                    {% if review.user.photo %}
-                    <div class="col-1 me-2">                    
-                        <img style="width: 60px; height: 60px; border-radius: 50%;" src="{{ review.user.photo.url }}" alt="user photo">
-                    </div>
-                    {% endif %}
-                    <div class="col-4">
-                        <b>{{ review.user.username }}</b> {{ review.stars_given }} <i>yulduzcha berdi {{ review.created_at }}</i>
-                        <p><br>{{ review.comment_text }}</p>
-                        <hr>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/icon" href="{% static 'assets/logo/favicon.png' %}"/>
+     
+        <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
 
+		<link rel="stylesheet" href="{% static 'assets/css/linearicons.css' %}">
+
+	
+        <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+
+        <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+
+        <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+		<link rel="stylesheet" href="{% static 'assets/css/slick-theme.css' %}">
+
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+
+		<link rel="stylesheet" href="{% static 'assets/css/bootsnav.css' %}">	
+        
+
+        <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
+
+        <link rel="stylesheet" href="{% static 'assets/css/responsive1.css' %}">
+    <title>All Books</title>
+</head>
+<body>
+    {% include "navbar.html" %}
+    <h1>All Reviews</h1>
+ 
+
+
+        <section id="reviews" class="reviews">
+            <div class="section-header">
+                <h2>clients reviews</h2>
+                <p>What our client say about us</p>
+            </div><!--/.section-header-->
+            <div class="reviews-content">
+                <div class="testimonial-carousel">
+                    {% for review in all_reviews %}
+                    <div class="single-testimonial-box">
+                        <div class="testimonial-description">
+                            <div class="testimonial-info">
+                                <div class="testimonial-img">
+                                    <img src="{{review.user.photo.url}}" alt="clients" style="border-radius:50%; width:60px">
+                                </div><!--/.testimonial-img-->
+                                <div class="testimonial-person">
+                                    <h2>{{review.user.username}}</h2>
+                                    <h4>{{review.stars_given}}</h4>
+                                    <div class="testimonial-person-star">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div><!--/.testimonial-person-->
+                            </div><!--/.testimonial-info-->
+                            <div class="testimonial-comment">
+                                <p>
+                                    {{review.comment_text}}
+                                </p>
+                            </div><!--/.testimonial-comment-->
+                        </div><!--/.testimonial-description-->
+                    </div>
+                    {% endfor %}<!--/.single-testimonial-box-->
+           
+
+                </div>
+            </div>
+        
+        </section>
+
+        {% for review in all_reviews %}
+
+        {% endfor %}
+    
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+        
+    <!--modernizr.min.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    
+    <!--bootstrap.min.js-->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    
+    <!-- bootsnav js -->
+    <script src="{% static 'assets/js/bootsnav.js' %}"></script>
+
+    <!--feather.min.js-->
+    <script  src="{% static 'assets/js/feather.min.js' %}"></script>
+
+    <!-- counter js -->
+    <script src="{% static 'assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'assets/js/waypoints.min.js' %}"></script>
+
+    <!--slick.min.js-->
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+         
+    <!--Custom JS-->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+</body>
+</html>
